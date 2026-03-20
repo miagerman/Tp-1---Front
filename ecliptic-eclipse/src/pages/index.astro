@@ -1,359 +1,145 @@
 ---
 const comidas = [
-  { nombre: "Pizza", categoria: "Rapida", descripcion: "Masa con salsa y queso.", emoji: "🍕" },
-  { nombre: "Hamburguesa", categoria: "Rapida", descripcion: "Pan, carne y vegetales.", emoji: "🍔" },
-  { nombre: "Empanadas", categoria: "Tradicional", descripcion: "Masa rellena al horno o frita.", emoji: "🥟" },
-  { nombre: "Asado", categoria: "Tradicional", descripcion: "Carne cocinada a la parrilla.", emoji: "🥩" },
-  { nombre: "Ensalada", categoria: "Saludable", descripcion: "Vegetales frescos y livianos.", emoji: "🥗" },
-  { nombre: "Sushi", categoria: "Saludable", descripcion: "Arroz con pescado o vegetales.", emoji: "🍣" },
-  { nombre: "Helado", categoria: "Postre", descripcion: "Postre frio de distintos sabores.", emoji: "🍨" },
-  { nombre: "Torta", categoria: "Postre", descripcion: "Postre dulce para compartir.", emoji: "🍰" }
+  { nombre: "Pizza", categoria: "Rapida", emoji: "🍕" },
+  { nombre: "Hamburguesa", categoria: "Rapida", emoji: "🍔" },
+  { nombre: "Empanadas", categoria: "Tradicional", emoji: "🥟" },
+  { nombre: "Asado", categoria: "Tradicional", emoji: "🥩" },
+  { nombre: "Ensalada", categoria: "Saludable", emoji: "🥗" },
+  { nombre: "Sushi", categoria: "Saludable", emoji: "🍣" },
+  { nombre: "Helado", categoria: "Postre", emoji: "🍨" },
+  { nombre: "Torta", categoria: "Postre", emoji: "🍰" }
 ];
 ---
 
-
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Catálogo de comidas</title>
-
-
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-
-
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-
-
-      body {
-        font-family: 'Poppins', sans-serif;
-        background-color: #fff7ed;
-        color: #2c1810;
-        line-height: 1.5;
-      }
-
-
-      header {
-        background: linear-gradient(135deg, #f97316, #ea580c);
-        color: white;
-        text-align: center;
-        padding: 50px 20px;
-      }
-
-
-      header h1 {
-        font-size: 3rem;
-        margin-bottom: 10px;
-        letter-spacing: 1px;
-      }
-
-
-      nav {
-        margin-top: 20px;
-      }
-
-
-      nav a {
-        color: white;
-        text-decoration: none;
-        margin: 0 10px;
-        font-weight: bold;
-        font-size: 1rem;
-      }
-
-
-      main {
-        max-width: 1100px;
-        margin: 0 auto;
-        padding: 20px;
-      }
-
-
-      section {
-        margin: 40px 0;
-      }
-
-
-      h2 {
-        margin-bottom: 15px;
-        color: #c2410c;
-        font-size: 1.8rem;
-      }
-
-
-      .controles {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-        margin-bottom: 20px;
-      }
-
-
-      .controles input,
-      .controles select,
-      .controles button {
-        padding: 10px;
-        border: 1px solid #fdba74;
-        border-radius: 8px;
-        font-size: 1rem;
-        font-family: 'Poppins', sans-serif;
-      }
-
-
-      .controles input {
-        flex: 1;
-        min-width: 220px;
-      }
-
-
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 16px;
-      }
-
-
-      .card {
-        background-color: white;
-        border: 1px solid #fed7aa;
-        border-radius: 12px;
-        padding: 16px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-      }
-
-
-      .card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-      }
-
-
-      .emoji {
-        font-size: 2rem;
-        margin-bottom: 10px;
-      }
-
-
-      .categoria {
-        display: inline-block;
-        margin: 8px 0;
-        background-color: #ffedd5;
-        color: #c2410c;
-        padding: 4px 8px;
-        border-radius: 999px;
-        font-size: 0.9rem;
-        font-weight: bold;
-      }
-
-
-      .bloque {
-        background-color: white;
-        border: 1px solid #fed7aa;
-        border-radius: 12px;
-        padding: 20px;
-      }
-
-
-      #botonMensaje {
-        margin-top: 15px;
-        background-color: #f97316;
-        color: white;
-        border: none;
-        cursor: pointer;
-        transition: background-color 0.2s ease;
-      }
-
-
-      #botonMensaje:hover {
-        background-color: #ea580c;
-      }
-
-
-      #mensaje {
-        margin-top: 12px;
-        font-weight: bold;
-        color: #c2410c;
-      }
-
-
-      #sinResultados {
-        display: none;
-        margin-top: 15px;
-        font-weight: bold;
-      }
-
-
-      footer {
-        background-color: #2c1810;
-        color: white;
-        text-align: center;
-        padding: 20px;
-        margin-top: 40px;
-      }
-
-
-      @media (max-width: 900px) {
-        .grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-
-
-      @media (max-width: 600px) {
-        .grid {
-          grid-template-columns: 1fr;
-        }
-
-
-        header h1 {
-          font-size: 2.2rem;
-        }
-
-
-        nav a {
-          display: inline-block;
-          margin: 8px;
-        }
-      }
-    </style>
-  </head>
-
-
-  <body>
-    <header>
-      <h1>Catálogo de Comidas</h1>
-
-
-      <nav>
-        <a href="#catalogo">Catálogo</a>
-        <a href="#sobre">Sobre el proyecto</a>
-        <a href="#contacto">Contacto</a>
-      </nav>
-    </header>
-
-
-    <main>
-      <section id="catalogo">
-        <h2>Catálogo</h2>
-        <p>Buscá una comida o filtrá por categoría.</p>
-
-
-        <div class="controles">
-          <input type="text" id="buscador" placeholder="Buscar comida..." />
-          <select id="filtro">
-            <option value="Todas">Todas</option>
-            <option value="Rapida">Rapida</option>
-            <option value="Tradicional">Tradicional</option>
-            <option value="Saludable">Saludable</option>
-            <option value="Postre">Postre</option>
-          </select>
-        </div>
-
-
-        <div class="grid">
-          {comidas.map((comida) => (
-            <article class="card" data-nombre={comida.nombre.toLowerCase()} data-categoria={comida.categoria}>
-              <div class="emoji">{comida.emoji}</div>
-              <h3>{comida.nombre}</h3>
-              <span class="categoria">{comida.categoria}</span>
-              <p>{comida.descripcion}</p>
-            </article>
-          ))}
-        </div>
-
-
-        <p id="sinResultados">No se encontraron comidas.</p>
-      </section>
-
-
-      <section id="sobre">
-        <h2>Sobre el proyecto</h2>
-        <div class="bloque">
-          <p>
-            Hola a todos. Este es mi catálogo de comidas con algunas de mis comidas favoritas.
-            La idea es poder explorarlas, buscarlas y filtrarlas por categoría.
-            Espero que les guste y que tengan un paladar parecido al mío.
-          </p>
-        </div>
-      </section>
-
-
-      <section id="contacto">
-        <h2>Contacto</h2>
-        <div class="bloque">
-          <p>
-            Hola, soy Mia German. Si querés contactarte conmigo, mi Gmail es:
-          </p>
-          <p><strong>miagerman20082020@gmail.com</strong></p>
-
-
-          <button id="botonMensaje">Mostrar mensaje</button>
-          <p id="mensaje"></p>
-        </div>
-      </section>
-    </main>
-
-
-    <footer>
-      <p>Proyecto Frontend - Catálogo de comidas</p>
-    </footer>
-
-
-    <script is:inline>
-      // @ts-nocheck
-      const buscador = document.getElementById("buscador");
-      const filtro = document.getElementById("filtro");
-      const cards = document.querySelectorAll(".card");
-      const sinResultados = document.getElementById("sinResultados");
-      const botonMensaje = document.getElementById("botonMensaje");
-      const mensaje = document.getElementById("mensaje");
-
-
-      function filtrarComidas() {
-        const texto = buscador.value.toLowerCase().trim();
-        const categoria = filtro.value;
-        let visibles = 0;
-
-
-        cards.forEach((card) => {
-          const nombre = card.getAttribute("data-nombre");
-          const categoriaCard = card.getAttribute("data-categoria");
-
-
-          const coincideTexto = nombre.includes(texto);
-          const coincideCategoria = categoria === "Todas" || categoriaCard === categoria;
-
-
-          if (coincideTexto && coincideCategoria) {
-            card.style.display = "block";
-            visibles++;
-          } else {
-            card.style.display = "none";
-          }
-        });
-
-
-        if (visibles === 0) {
-          sinResultados.style.display = "block";
-        } else {
-          sinResultados.style.display = "none";
-        }
-      }
-
-
-      buscador.addEventListener("input", filtrarComidas);
-      filtro.addEventListener("change", filtrarComidas);
-
-
-      botonMensaje.addEventListener("click", function () {
-        mensaje.textContent = "¡Gracias por visitar mi catálogo de comidas!";
-      });
-    </script>
-  </body>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Comidas</title>
+
+  <style>
+    body { font-family: Arial; }
+
+    header {
+      background: orange;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    nav a {
+      color: white;
+      margin: 5px;
+      text-decoration: none;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      padding: 10px;
+    }
+
+    .card {
+      border: 1px solid black;
+      padding: 10px;
+      text-align: center;
+    }
+
+    @media (max-width: 800px) {
+      .grid { grid-template-columns: 2fr 2fr; }
+    }
+
+    @media (max-width: 500px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Catálogo de Comidas</h1>
+  <nav>
+    <a href="#catalogo">Catálogo</a>
+    <a href="#sobre">Sobre</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+</header>
+
+<section id="catalogo">
+  <h2>Catálogo</h2>
+
+  <input id="buscador" placeholder="buscar">
+  
+  <select id="filtro">
+    <option value="Todas">Todas</option>
+    <option value="Rapida">Rapida</option>
+    <option value="Tradicional">Tradicional</option>
+    <option value="Saludable">Saludable</option>
+    <option value="Postre">Postre</option>
+  </select>
+
+  <div class="grid">
+    {comidas.map(c => (
+      <div class="card" data-nombre={c.nombre.toLowerCase()} data-cat={c.categoria}>
+        <div>{c.emoji}</div>
+        <p>{c.nombre}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<section id="Sobre el Proyecto">
+  <h2>Sobre el Proyecto</h2>
+  <p>Hola a todos. Este es mi catálogo de comidas con algunas de mis comidas favoritas.
+    La idea es poder explorarlas, buscarlas y filtrarlas por categoría.
+    Espero que les guste y que tengan un paladar parecido al mío.
+</p>
+</section>
+
+<section id="contacto">
+  <h2>Contacto</h2>
+  <p>  Hola, soy Mia German. Si querés contactarte conmigo, mi Gmail es:
+    Hola, soy Mia German. Si querés contactarte conmigo, mi Gmail es: miagerman20082020@gmail.com
+  </p>
+  <button id="btn">Click</button>
+  <p id="msg"></p>
+</section>
+
+<script is:inline>
+const b = document.getElementById("buscador");
+const f = document.getElementById("filtro");
+const cards = document.querySelectorAll(".card");
+const no = document.getElementById("no");
+
+function filtrar() {
+  let t = b.value.toLowerCase();
+  let cat = f.value;
+  let count = 0;
+
+  cards.forEach(c => {
+    let n = c.getAttribute("data-nombre");
+    let c2 = c.getAttribute("data-cat");
+
+    if (n.includes(t) && (cat=="Todas" || c2==cat)) {
+      c.style.display="block";
+      count++;
+    } else {
+      c.style.display="none";
+    }
+  });
+
+  no.style.display = count==0 ? "block" : "none";
+}
+
+b.addEventListener("input", filtrar);
+f.addEventListener("change", filtrar);
+
+document.getElementById("btn").onclick = () => {
+  document.getElementById("msg").innerText = "Gracias por visitar";
+};
+</script>
+
+</body>
 </html>
