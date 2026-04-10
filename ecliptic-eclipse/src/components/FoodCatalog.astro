@@ -1,0 +1,137 @@
+---
+import FoodCard from "./FoodCard.astro";
+import { comidas } from "../data/comidas";
+---
+
+<section id="catalogo" class="section">
+  <div class="container">
+    <div class="title-box">
+      <h2>Catálogo</h2>
+      <p>Buscá una comida por nombre o filtrá por categoría.</p>
+    </div>
+
+    <div class="filters">
+      <input id="buscador" type="text" placeholder="Buscar comida..." />
+      <select id="filtro">
+        <option value="Todas">Todas</option>
+        <option value="Rapida">Rapida</option>
+        <option value="Tradicional">Tradicional</option>
+        <option value="Saludable">Saludable</option>
+        <option value="Postre">Postre</option>
+      </select>
+    </div>
+
+    <p id="no" class="no-results">No se encontraron comidas con ese filtro.</p>
+
+    <div class="grid">
+      {comidas.map((c) => (
+        <FoodCard nombre={c.nombre} categoria={c.categoria} emoji={c.emoji} />
+      ))}
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  const buscador = document.getElementById("buscador");
+  const filtro = document.getElementById("filtro");
+  const cards = document.querySelectorAll("[data-nombre]");
+  const no = document.getElementById("no");
+
+  function filtrar() {
+    const texto = buscador.value.toLowerCase();
+    const categoria = filtro.value;
+    let count = 0;
+
+    cards.forEach((card) => {
+      const nombre = card.getAttribute("data-nombre");
+      const cat = card.getAttribute("data-cat");
+
+      if (nombre.includes(texto) && (categoria === "Todas" || cat === categoria)) {
+        card.style.display = "flex";
+        count++;
+      } else {
+        card.style.display = "none";
+      }
+    });
+
+    no.style.display = count === 0 ? "block" : "none";
+  }
+
+  buscador.addEventListener("input", filtrar);
+  filtro.addEventListener("change", filtrar);
+</script>
+
+<style>
+  .section {
+    padding: 50px 20px 40px;
+  }
+
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  .title-box {
+    margin-bottom: 24px;
+    text-align: center;
+  }
+
+  .title-box h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+
+  .title-box p {
+    color: var(--muted);
+  }
+
+  .filters {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+
+  .filters input,
+  .filters select {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 14px;
+    min-width: 220px;
+    box-shadow: var(--shadow);
+    font: inherit;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+
+  .no-results {
+    display: none;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #b91c1c;
+    font-weight: bold;
+  }
+
+  @media (max-width: 900px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 520px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+
+    .filters input,
+    .filters select {
+      width: 100%;
+    }
+  }
+</style>

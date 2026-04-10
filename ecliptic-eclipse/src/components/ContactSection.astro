@@ -1,0 +1,82 @@
+<section id="contacto" class="section">
+    <div class="container">
+      <h2>Contacto</h2>
+      <p>
+        Hola, soy Mia German. Si querés contactarte conmigo, podés escribirme a:
+      </p>
+  
+      <a class="mail-link" href="mailto:miagerman20082020@gmail.com">
+        miagerman20082020@gmail.com
+      </a>
+  
+      <div class="action">
+        <button id="btn">Hacer click</button>
+        <p id="msg"></p>
+      </div>
+    </div>
+  
+    <script is:inline>
+      document.getElementById("btn").onclick = () => {
+        document.getElementById("msg").innerText = "¡Gracias por visitar mi catálogo!";
+      };
+    </script>
+  </section>
+  
+  <style>
+    .section {
+      padding: 40px 20px;
+    }
+  
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 30px;
+      text-align: center;
+    }
+  
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 14px;
+    }
+  
+    .mail-link {
+      display: inline-block;
+      margin: 14px 0 20px;
+      color: var(--primary-dark);
+      font-weight: bold;
+      text-decoration: none;
+    }
+  
+    .mail-link:hover {
+      text-decoration: underline;
+    }
+  
+    .action {
+      margin-top: 10px;
+    }
+  
+    button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.2s ease;
+      font: inherit;
+    }
+  
+    button:hover {
+      background: var(--primary-dark);
+    }
+  
+    #msg {
+      margin-top: 14px;
+      font-weight: bold;
+      color: #166534;
+    }
+  </style>
